@@ -45,9 +45,12 @@ export default class AddProject extends React.Component {
 
           <button
             onClick={e => {
+              const name = this.nameRef.current.value;
+              const description = this.descriptionRef.current.value;
+              const completed = this.completedRef.checked;
+
               e.preventDefault();
-              (!updatingProject && this.props.axios_postProject(this.nameRef.current.value, this.descriptionRef.current.value, this.completedRef.checked)) ||
-                (updatingProject && this.props.axios_updateProject(updatingProject.id, this.nameRef.current.value, this.descriptionRef.current.value, this.completedRef.checked));
+              (!updatingProject && this.props.axios_postProject(name, description, completed)) || (updatingProject && this.props.axios_updateProject(updatingProject.id, name, description, completed));
               this.clearInputs();
             }}>
             {(!updatingProject && 'Add project') || (updatingProject && 'Update project')}
