@@ -1,3 +1,6 @@
-// play this: https://www.youtube.com/watch?v=d-diB65scQU
+const server = require('./api/server.js');
+const port = process.env.PORT || 9000;
 
-// code away!
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
