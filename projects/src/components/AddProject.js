@@ -13,11 +13,11 @@ export default class AddProject extends React.Component {
         <h3>Add a New Project</h3>
         <div>
           Project Name:
-          <input type="text" ref={this.nameRef} />
+          <input type="text" ref={this.nameRef} required="true" />
         </div>
         <div>
           Project Description:
-          <input type="text" ref={this.descriptionRef} />
+          <input type="text" ref={this.descriptionRef} required="true" />
         </div>
         <button
           onClick={e => {
