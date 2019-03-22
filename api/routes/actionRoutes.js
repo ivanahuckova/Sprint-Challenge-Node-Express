@@ -25,6 +25,18 @@ routes.get('/:id', async (req, res) => {
 });
 
 // =============== POST ROUTES =============== //
+/* Body needs to be in following format:
+REQUIRED:
+{ 
+  project_id: number
+  description : string
+  notes: string
+}
+OPTIONAL:
+{
+  completed: boolean
+}
+*/
 
 routes.post('/', async (req, res) => {
   try {
@@ -36,6 +48,15 @@ routes.post('/', async (req, res) => {
 });
 
 // =============== UPDATE ROUTES =============== //
+/* Body needs to be in following format:
+OPTIONAL:
+{
+  completed: boolean,
+  project_id: number
+  description : string
+  notes: string
+}
+*/
 
 routes.put('/:id', async (req, res) => {
   try {

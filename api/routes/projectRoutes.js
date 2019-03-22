@@ -27,5 +27,25 @@ routes.get('/:id', async (req, res) => {
 });
 
 // =============== POST ROUTES =============== //
+/* Body needs to be in following format:
+REQUIRED:
+{ 
+  name: string
+  description : string
+}
+OPTIONAL:
+{
+  completed: boolean
+}
+*/
+
+routes.post('/', async (req, res) => {
+  try {
+    const newProject = await projectDb.insert(req.body);
+    res.status(200).json(newProject);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 module.exports = routes;
