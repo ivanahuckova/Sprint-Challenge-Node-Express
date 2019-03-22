@@ -40,4 +40,15 @@ routes.post('/', async (req, res) => {
   }
 });
 
+// =============== DELETE ROUTES =============== //
+
+routes.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedAction = await actionDb.remove(id);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = routes;
