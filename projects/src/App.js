@@ -17,21 +17,21 @@ class App extends Component {
 
   axios_fetchProjects = () => {
     axios
-      .get('http://localhost:9000/projects')
+      .get('hhttps://projects-and-actions.herokuapp.com/projects')
       .then(data => this.setState({ projects: data.data }))
       .catch(err => console.log(err));
   };
 
   axios_fetchProjectsActions = id => {
     axios
-      .get(`http://localhost:9000/projects/${id}/actions`)
+      .get(`https://projects-and-actions.herokuapp.com/projects/${id}/actions`)
       .then(data => this.setState({ actions: data.data }))
       .catch(err => console.log(err));
   };
 
   axios_postProject = (name, description, completed) => {
     axios
-      .post('http://localhost:9000/projects', { name: name, description: description, completed: completed })
+      .post('https://projects-and-actions.herokuapp.com/projects', { name: name, description: description, completed: completed })
       .then(data => console.log(data))
       .then(() => this.axios_fetchProjects())
       .catch(err => console.log(err));
@@ -39,7 +39,7 @@ class App extends Component {
 
   axios_updateProject = (id, name, description, completed) => {
     axios
-      .put(`http://localhost:9000/projects/${id}`, { name: name, description: description, completed: completed })
+      .put(`https://projects-and-actions.herokuapp.com/projects/${id}`, { name: name, description: description, completed: completed })
       .then(data => console.log(data))
       .then(() => this.axios_fetchProjects())
       .then(() => this.setState({ currentProject: null }))
