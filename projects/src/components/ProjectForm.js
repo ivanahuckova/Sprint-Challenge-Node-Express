@@ -1,4 +1,30 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledProject = styled.div`
+  background-color: #23292d;
+  color: white;
+  margin: 10px 0;
+  padding: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
+const StyledInput = styled.input`
+  border-radius: 10px;
+  padding: 7px 10px;
+  margin: 5px;
+  border: none;
+`;
+
+const InvertedButton = styled.button`
+  padding: 10px 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border: none;
+  border-radius: 50px;
+  color: #23292d;
+  margin: 5px;
+  cursor: pointer;
+`;
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
@@ -18,23 +44,23 @@ export default class ProjectForm extends React.Component {
   render() {
     const updatingProject = this.props.currentProject;
     return (
-      <div>
-        <h3>
+      <StyledProject>
+        <h2>
           {updatingProject && <div>Update the project</div>}
           {!updatingProject && <div>Add a New Project</div>}
-        </h3>
+        </h2>
         <form>
           <div>
-            Project Name:
-            <input type="text" ref={this.nameRef} defaultValue={(!updatingProject && '') || (updatingProject && updatingProject.name)} />
+            Name:
+            <StyledInput type="text" ref={this.nameRef} defaultValue={(!updatingProject && '') || (updatingProject && updatingProject.name)} />
           </div>
           <div>
-            Project Description:
-            <input type="text" ref={this.descriptionRef} defaultValue={(!updatingProject && '') || (updatingProject && updatingProject.description)} />
+            Description:
+            <StyledInput type="text" ref={this.descriptionRef} defaultValue={(!updatingProject && '') || (updatingProject && updatingProject.description)} />
           </div>
           <div>
             Completed:
-            <input
+            <StyledInput
               type="checkbox"
               ref={input => {
                 this.completedRef = input;
@@ -43,7 +69,7 @@ export default class ProjectForm extends React.Component {
             />
           </div>
 
-          <button
+          <InvertedButton
             onClick={e => {
               const name = this.nameRef.current.value;
               const description = this.descriptionRef.current.value;
@@ -54,9 +80,10 @@ export default class ProjectForm extends React.Component {
               this.clearInputs();
             }}>
             {(!updatingProject && 'Add project') || (updatingProject && 'Update project')}
-          </button>
+          </InvertedButton>
+          {updatingProject && <InvertedButton onClick={() => this.props.removeCurrentProject()}>Switch to add project</InvertedButton>}
         </form>
-      </div>
+      </StyledProject>
     );
   }
 }
