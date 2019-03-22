@@ -30,7 +30,7 @@ routes.get('/:id', async (req, res) => {
 /* Body needs to be in following format:
 REQUIRED:
 { 
-  name: string
+  name: string,
   description : string
 }
 OPTIONAL:
@@ -43,6 +43,26 @@ routes.post('/', async (req, res) => {
   try {
     const newProject = await projectDb.insert(req.body);
     res.status(200).json(newProject);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// =============== UPDATE ROUTES =============== //
+/* Body needs to be in following format:
+OPTIONAL:
+{
+  completed: boolean,
+  description : string,
+  name: string
+}
+*/
+
+routes.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedProject = await projectDb.update(id, req.body);
+    res.status(200).json(updatedProject);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
