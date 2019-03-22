@@ -40,6 +40,22 @@ routes.post('/', async (req, res) => {
   }
 });
 
+// =============== UPDATE ROUTES =============== //
+
+routes.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedAction = await actionDb.update(id, req.body);
+    if (updatedAction) {
+      res.status(200).json(updatedAction);
+    } else {
+      res.status(400).json({ message: `Action with id ${id} does not exist` });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // =============== DELETE ROUTES =============== //
 
 routes.delete('/:id', async (req, res) => {
