@@ -21,12 +21,6 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  doSomething = index => {
-    this.setState(prevState => ({
-      keys: prevState.keys.concat([index])
-    }));
-  };
-
   axios_fetchProjectsActions = id => {
     axios
       .get(`http://localhost:9000/projects/${id}/actions`)
@@ -34,11 +28,19 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  axios_postProject = (name, description) => {
+    axios
+      .post('http://localhost:9000/projects', { name: name, description: description })
+      .then(data => console.log(data))
+      .then(() => this.axios_fetchProjects())
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div className="App">
         <h1>Projects & Actions</h1>
-        <AddProject />
+        <AddProject axios_postProject={this.axios_postProject} />
         <Project projects={this.state.projects} actions={this.state.actions} axios_fetchProjects={this.axios_fetchProjects} axios_fetchProjectsActions={this.axios_fetchProjectsActions} />
       </div>
     );

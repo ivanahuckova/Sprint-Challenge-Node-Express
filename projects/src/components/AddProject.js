@@ -13,12 +13,21 @@ export default class AddProject extends React.Component {
         <h3>Add a New Project</h3>
         <div>
           Project Name:
-          <input ref={this.nameRef} />
+          <input type="text" ref={this.nameRef} />
         </div>
         <div>
           Project Description:
-          <input ref={this.descriptionRef} />
+          <input type="text" ref={this.descriptionRef} />
         </div>
+        <button
+          onClick={e => {
+            e.preventDefault();
+            this.props.axios_postProject(this.nameRef.current.value, this.descriptionRef.current.value);
+            this.nameRef = '';
+            this.descriptionRef = '';
+          }}>
+          Add project
+        </button>
       </form>
     );
   }
