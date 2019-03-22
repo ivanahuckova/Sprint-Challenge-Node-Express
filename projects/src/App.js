@@ -42,6 +42,7 @@ class App extends Component {
       .put(`http://localhost:9000/projects/${id}`, { name: name, description: description, completed: completed })
       .then(data => console.log(data))
       .then(() => this.axios_fetchProjects())
+      .then(() => this.setState({ currentProject: null }))
       .catch(err => console.log(err));
   };
 
