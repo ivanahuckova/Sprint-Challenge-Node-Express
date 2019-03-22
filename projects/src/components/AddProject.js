@@ -16,35 +16,40 @@ export default class AddProject extends React.Component {
 
   render() {
     return (
-      <form>
-        <h3>Add a New Project</h3>
-        <div>
-          Project Name:
-          <input type="text" ref={this.nameRef} required="true" />
-        </div>
-        <div>
-          Project Description:
-          <input type="text" ref={this.descriptionRef} required="true" />
-        </div>
-        <div>
-          {' '}
-          Completed:
-          <input
-            type="checkbox"
-            ref={input => {
-              this.completedRef = input;
-            }}
-          />
-        </div>
-        <button
-          onClick={e => {
-            e.preventDefault();
-            this.props.axios_postProject(this.nameRef.current.value, this.descriptionRef.current.value, this.completedRef.checked);
-            this.clearInputs();
-          }}>
-          Add project
-        </button>
-      </form>
+      <div>
+        <h3>
+          {this.props.currentProject && <div>Update the project</div>}
+          {!this.props.currentProject && <div>Add a New Project</div>}
+        </h3>
+        <form>
+          <div>
+            Project Name:
+            <input type="text" ref={this.nameRef} />
+          </div>
+          <div>
+            Project Description:
+            <input type="text" ref={this.descriptionRef} />
+          </div>
+          <div>
+            {' '}
+            Completed:
+            <input
+              type="checkbox"
+              ref={input => {
+                this.completedRef = input;
+              }}
+            />
+          </div>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              this.props.axios_postProject(this.nameRef.current.value, this.descriptionRef.current.value, this.completedRef.checked);
+              this.clearInputs();
+            }}>
+            Add project
+          </button>
+        </form>
+      </div>
     );
   }
 }

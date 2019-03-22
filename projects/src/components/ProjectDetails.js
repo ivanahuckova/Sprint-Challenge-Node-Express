@@ -38,7 +38,13 @@ export default function ProjectDetails(props) {
         {!props.project.completed && 'No'}
       </div>
       <button onClick={() => props.axios_fetchProjectsActions(props.project.id)}>Would you like to see actions for this project?</button>
-      <button>Would you like to update project</button>
+      <button
+        onClick={() => {
+          console.log(props.project);
+          props.updateCurrentProject(props.project);
+        }}>
+        Would you like to update project
+      </button>
       {props.actions &&
         props.actions[0].project_id === props.project.id &&
         props.actions.map(action => {
