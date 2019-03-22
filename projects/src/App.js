@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //Import components
 import Project from './components/Project';
-import AddProject from './components/AddProject';
+import ProjectForm from './components/ProjectForm';
 
 //Styling
 import './App.css';
@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Projects & Actions</h1>
-        <AddProject axios_postProject={this.axios_postProject} axios_updateProject={this.axios_updateProject} currentProject={this.state.currentProject} projects={this.state.projects} />
+        <ProjectForm axios_postProject={this.axios_postProject} axios_updateProject={this.axios_updateProject} currentProject={this.state.currentProject} projects={this.state.projects} />
         <Project
           projects={this.state.projects}
           actions={this.state.actions}
