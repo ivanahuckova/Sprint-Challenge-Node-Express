@@ -26,6 +26,20 @@ routes.get('/:id', async (req, res) => {
   }
 });
 
+routes.get('/:id/actions', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const actionsForSpecificProject = await projectDb.getProjectActions(id);
+    if (actionsForSpecificProject.length > 0) {
+      res.status(200).json(actionsForSpecificProject);
+    } else {
+      res.status(400).json({ message: 'No actions for that project' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // =============== POST ROUTES =============== //
 /* Body needs to be in following format:
 REQUIRED:
@@ -63,6 +77,22 @@ routes.put('/:id', async (req, res) => {
     const { id } = req.params;
     const updatedProject = await projectDb.update(id, req.body);
     res.status(200).json(updatedProject);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// =============== DELETE ROUTES =============== //
+
+routes.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedProject = await projectDb.remove(id);
+    if (deletedProject) {
+      res.status(200).json({ message: 'Project was deleted' });
+    } else {
+      res.status(400).json({ message: 'Not found project with that id' });
+    }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }

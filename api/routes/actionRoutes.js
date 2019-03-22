@@ -78,6 +78,11 @@ routes.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const deletedAction = await actionDb.remove(id);
+    if (deletedAction) {
+      res.status(200).json({ message: 'Action deleted' });
+    } else {
+      res.status(400).json({ message: 'Not found action with that id' });
+    }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
