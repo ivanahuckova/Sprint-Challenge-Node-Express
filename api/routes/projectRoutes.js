@@ -33,7 +33,7 @@ routes.get('/:id/actions', async (req, res) => {
     if (actionsForSpecificProject.length > 0) {
       res.status(200).json(actionsForSpecificProject);
     } else {
-      res.status(400).json({ message: 'No actions for that project' });
+      res.status(404).json({ message: 'No actions for that project' });
     }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -56,7 +56,7 @@ OPTIONAL:
 routes.post('/', async (req, res) => {
   try {
     const newProject = await projectDb.insert(req.body);
-    res.status(200).json(newProject);
+    res.status(201).json(newProject);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }

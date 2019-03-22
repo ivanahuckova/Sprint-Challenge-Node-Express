@@ -41,7 +41,7 @@ OPTIONAL:
 routes.post('/', async (req, res) => {
   try {
     const newAction = await actionDb.insert(req.body);
-    res.status(200).json(newAction);
+    res.status(201).json(newAction);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
@@ -81,7 +81,7 @@ routes.delete('/:id', async (req, res) => {
     if (deletedAction) {
       res.status(200).json({ message: 'Action deleted' });
     } else {
-      res.status(400).json({ message: 'Not found action with that id' });
+      res.status(404).json({ message: 'Not found action with that id' });
     }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
