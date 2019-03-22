@@ -17,7 +17,7 @@ class App extends Component {
 
   axios_fetchProjects = () => {
     axios
-      .get('hhttps://projects-and-actions.herokuapp.com/projects')
+      .get('https://projects-and-actions.herokuapp.com/projects')
       .then(data => this.setState({ projects: data.data }))
       .catch(err => console.log(err));
   };
