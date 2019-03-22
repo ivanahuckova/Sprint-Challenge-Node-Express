@@ -11,7 +11,8 @@ import './App.css';
 class App extends Component {
   state = {
     projects: null,
-    actions: null
+    actions: null,
+    currentProject: null
   };
 
   axios_fetchProjects = () => {
@@ -28,9 +29,9 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  axios_postProject = (name, description) => {
+  axios_postProject = (name, description, completed) => {
     axios
-      .post('http://localhost:9000/projects', { name: name, description: description })
+      .post('http://localhost:9000/projects', { name: name, description: description, completed: completed })
       .then(data => console.log(data))
       .then(() => this.axios_fetchProjects())
       .catch(err => console.log(err));
