@@ -19,9 +19,21 @@ routes.get('/:id', async (req, res) => {
     const { id } = req.params;
 
     const specificAction = await actionDb.get(id);
-    console.log(specificAction);
     if (specificAction) {
       res.status(200).json(specificAction);
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// =============== POST ROUTES =============== //
+
+routes.post('/', async (req, res) => {
+  try {
+    const newAction = await actionDb.insert(req.body);
+    if (newAction) {
+      res.status(200).json(newAction);
     }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
